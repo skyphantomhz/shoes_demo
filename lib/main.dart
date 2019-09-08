@@ -183,8 +183,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   _sizeSelection("9"),
                   Container(
                     width: 2.0,
-                    height: 50.0,
-                    margin: EdgeInsets.fromLTRB(10, 0, 20, 0),
+                    height: 40.0,
+                    margin: EdgeInsets.fromLTRB(5, 0, 10, 0),
                     decoration:
                         BoxDecoration(color: Color.fromRGBO(32, 24, 27, 1)),
                   ),
@@ -200,6 +200,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   String sizeSelected = "6";
+  int colorSelected = 0xff333335;
+
   Widget _sizeSelection(String size) {
     return GestureDetector(
       onTap: () {
@@ -209,14 +211,17 @@ class _MyHomePageState extends State<MyHomePage> {
           });
       },
       child: Container(
-        padding: EdgeInsets.all(15),
-        margin: EdgeInsets.only(right: 10.0),
+        width: 35,
+        height: 35,
+        alignment: Alignment.center,
+        margin: EdgeInsets.only(right: 5.0),
         decoration: BoxDecoration(
             color: sizeSelected == size
                 ? Colors.white
                 : Color.fromRGBO(238, 238, 255, 1),
             borderRadius: BorderRadius.all(Radius.circular(10))),
         child: Text(size,
+            textAlign: TextAlign.center,
             style: TextStyle(
                 fontFamily: 'Sofia-Pro', fontWeight: FontWeight.w800)),
       ),
@@ -224,15 +229,27 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _colorSelection(int color) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      margin: EdgeInsets.only(right: 10),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.white),
-      child: Container(
+    return GestureDetector(
+      onTap: () {
+        if (colorSelected != color)
+          setState(() {
+            colorSelected = color;
+          });
+      },
+          child: Container(
+        width: 35,
+        height: 35,
         padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(shape: BoxShape.circle, color: Color(color)),
+        margin: EdgeInsets.only(right: 10),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            color: colorSelected == color
+                ? Colors.white
+                : Color.fromRGBO(238, 238, 255, 1)),
+        child: Container(
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(shape: BoxShape.circle, color: Color(color)),
+        ),
       ),
     );
   }
